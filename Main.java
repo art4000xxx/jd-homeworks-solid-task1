@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -42,36 +43,32 @@ public class Main {
                     ui.displayMessage("2 - По диапазону цен");
                     String filterType = ui.getStringInput("Выберите фильтр: ");
 
+                    List<ProductFilter> filters = new ArrayList<>();
                     switch (filterType) {
                         case "1":
                             // Фильтр по ключевому слову
                             String keyword = ui.getStringInput("Введите ключевое слово: ");
-                            List<Product> filteredProductsByKeyword = shopManager.filterProductsByKeyword(keyword);
-                            if (filteredProductsByKeyword.isEmpty()) {
-                                ui.displayMessage("Товары не найдены.");
-                            } else {
-                                ui.displayMessage("Найденные товары:");
-                                for (int i = 0; i < filteredProductsByKeyword.size(); i++) {
-                                    ui.displayMessage((i + 1) + ". " + filteredProductsByKeyword.get(i).toString());
-                                }
-                            }
+                            filters.add(new KeywordProductFilter(keyword));
                             break;
                         case "2":
                             // Фильтр по диапазону цен
                             double minPrice = ui.getDoubleInput("Введите минимальную цену: ");
                             double maxPrice = ui.getDoubleInput("Введите максимальную цену: ");
-                            List<Product> filteredProductsByPriceRange = shopManager.filterProductsByPriceRange(minPrice, maxPrice);
-                            if (filteredProductsByPriceRange.isEmpty()) {
-                                ui.displayMessage("Товары не найдены.");
-                            } else {
-                                ui.displayMessage("Найденные товары:");
-                                for (int i = 0; i < filteredProductsByPriceRange.size(); i++) {
-                                    ui.displayMessage((i + 1) + ". " + filteredProductsByPriceRange.get(i).toString());
-                                }
-                            }
+                            filters.add(new PriceRangeProductFilter(minPrice, maxPrice));
                             break;
                         default:
                             ui.displayMessage("Неверный фильтр. Попробуйте еще раз.");
+                            continue; // Переходим к следующей итерации цикла
+                    }
+
+                    List<Product> filteredProducts = shopManager.filterProducts(filters);
+                    if (filteredProducts.isEmpty()) {
+                        ui.displayMessage("Товары не найдены.");
+                    } else {
+                        ui.displayMessage("Найденные товары:");
+                        for (int i = 0; i < filteredProducts.size(); i++) {
+                            ui.displayMessage((i + 1) + ". " + filteredProducts.get(i).toString());
+                        }
                     }
                     break;
                 case "3":

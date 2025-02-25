@@ -15,11 +15,7 @@ public class ShopManager {
         return shop.getAllProducts();
     }
 
-    public List<Product> filterProductsByKeyword(String keyword) {
-        return shop.filterProductsByKeyword(keyword);
-    }
-
-    public List<Product> filterProductsByPriceRange(double minPrice, double maxPrice) {
-        return shop.filterProductsByPriceRange(minPrice, maxPrice);
+    public List<Product> filterProducts(List<ProductFilter> filters) {
+        return shop.filterProducts(filters);
     }
 }

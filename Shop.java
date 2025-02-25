@@ -1,6 +1,5 @@
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 public class Shop {
     private List<Product> products;
@@ -14,19 +13,14 @@ public class Shop {
     }
 
     public List<Product> getAllProducts() {
-        return new ArrayList<>(this.products); // Возвращаем копию списка
+        return new ArrayList<>(this.products);
     }
 
-    public List<Product> filterProductsByKeyword(String keyword) {
-        return products.stream()
-                .filter(product -> product.getName().toLowerCase().contains(keyword.toLowerCase()) ||
-                        product.getDescription().toLowerCase().contains(keyword.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-
-    public List<Product> filterProductsByPriceRange(double minPrice, double maxPrice) {
-        return products.stream()
-                .filter(product -> product.getPrice() >= minPrice && product.getPrice() <= maxPrice)
-                .collect(Collectors.toList());
+    public List<Product> filterProducts(List<ProductFilter> filters) {
+        List<Product> filteredProducts = new ArrayList<>(this.products);
+        for (ProductFilter filter : filters) {
+            filteredProducts = filter.filter(filteredProducts);
+        }
+        return filteredProducts;
     }
 }
