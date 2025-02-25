@@ -1,9 +1,9 @@
 import java.util.List;
 
 public class ShopManager {
-    private Shop shop;
+    private ShopInterface shop;
 
-    public ShopManager(Shop shop) {
+    public ShopManager(ShopInterface shop) {
         this.shop = shop;
     }
 

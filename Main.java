@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         ConsoleUI ui = new ConsoleUI();
         Shop shop = new Shop();
-        ShopManager shopManager = new ShopManager(shop);
+        ShopManager shopManager = new ShopManager((ShopInterface) shop);
         Cart cart = new Cart();
         OrderService orderService = new OrderService();
 
