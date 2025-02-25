@@ -5,7 +5,7 @@
 Класс `Main` был разделен на несколько классов, каждый из которых отвечает за свою задачу:
 
 *   `ConsoleUI`: Отвечает за взаимодействие с пользователем через консоль.
-    *   Пример: [ConsoleUI.java](https://github.com/art4000xxx/jd-homeworks-solid-task1/blob/main/src/ConsoleUI.java)
+    *   Пример: [ConsoleUI.java](https://github.com/art4000xxx/jd-homeworks-solid-task1/blob/main/ConsoleUI.java)
 *   `ShopManager`: Отвечает за управление товарами в магазине.
     *   Пример: [ShopManager.java](https://github.com/art4000xxx/jd-homeworks-solid-task1/blob/main/src/ShopManager.java)
 *   `OrderService`: Отвечает за оформление заказа.
